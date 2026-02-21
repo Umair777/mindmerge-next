@@ -1,7 +1,7 @@
 "use client";
 import react from "react";
 
-export default function TagList( {question}) {
+export default function TagList( {question}: {question: string}) {
     return (
 
         <div className="flex shrink-0 items-center gap-2.5">

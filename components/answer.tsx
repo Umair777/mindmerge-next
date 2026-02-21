@@ -5,6 +5,7 @@ import VoteButton from "@/components/voteButton";
 import UserInfo from "@/components/userInfo";
 import CodeBlock from "@/components/codeBlock";
 export default function Answer( {question}: {question: string}) {
+    
     return (
         
         // <div className="flex flex-col bg-white">

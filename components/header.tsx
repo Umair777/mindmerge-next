@@ -1,13 +1,15 @@
+"user client";
+
 import React from "react";
 
 
-export default function Header({ title }) {
+export default function Header({ title }: { title: string }) {
 	//F48023
   return (
     <div className="flex items-center self-stretch bg-white py-[17px] px-[50px] border border-solid border-[#EAEAEA]">
 					<div className="flex shrink-0 items-center mr-[200px] gap-[15px]">
 						<img
-							src="logo.png"
+							src="/logo.png"
 							className="w-[35px] h-[39px] object-fill"
 						/>
 						<span className="text-black text-base" >

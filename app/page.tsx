@@ -4,7 +4,8 @@ import { useState } from "react";
 import PostQuestion from "@/components/postQuestion";
 
 export default function HomePage() {
-  const [question, setQuestion] = useState([]);
+  const [question, setQuestion] = useState("");
+
 
   return (
     <PostQuestion

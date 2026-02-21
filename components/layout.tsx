@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
 import Header from "./header";
 import Sidebar from "./sidebar";
 
-export default function Layout({ title, children }) {
+export default function Layout({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col bg-white min-h-screen">
 

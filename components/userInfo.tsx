@@ -1,7 +1,7 @@
 import react from "react";
 import ToggleSwitch from "./toggleAI";
 
-export default function UserInfo( {question}) {
+export default function UserInfo( {question}: {question: string}) {
     return (
         <div className="flex items-center self-stretch ml-10 ">
             <img
@@ -22,7 +22,7 @@ export default function UserInfo( {question}) {
                 src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/4j9QAmMJn9/a2lww5bx_expires_30_days.png"} 
                 className="w-6 h-6 object-fill "
             /> */}
-            < ToggleSwitch question={question} />
+            < ToggleSwitch  />
 
 
             

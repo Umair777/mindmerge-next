@@ -43,7 +43,7 @@ export default function Question( {Question, setQuestion}: {Question: string, se
 									</button>
 
                     <button className="flex shrink-0 items-center bg-[#00a6ff] text-left py-2 px-5 gap-3 rounded-[5px] border-0"
-                        onClick={() => router.push("/answer")}>
+                        onClick={() => router.push(`/answer/${encodeURIComponent(Question)}`)}>
                         <img
                             src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/4j9QAmMJn9/sd7bdvbx_expires_30_days.png"} 
                             className="w-[13px] h-[13px] rounded-[5px] object-fill"
