@@ -7,7 +7,7 @@ export default function CodeBlock( {question} ) {
                 {"1\n2\n3\n4\n5\n6\n7"}
             </span>
             <span className="text-black text-sm w-[196px]" >
-                {"package mian\n\nimport “fmt”\n\nfunc main() {\n      fmt.Println(“Hello, world!”)\n}"}
+                {"import { useState } from \"react\"; export default function Test() { const [count, setCount] = useState(0); function handleClick() { setCount(count + 1); console.log(count); } return ( <div> <p>{count}</p> <button onClick={handleClick}>Add</button> </div> ); }"}
             </span>
         </div>
 

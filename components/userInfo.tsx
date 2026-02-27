@@ -1,7 +1,15 @@
 import react from "react";
-import ToggleSwitch from "./toggleAI";
+import ToggleAI from "./toggleAI";
 
-export default function UserInfo( {question}: {question: string}) {
+export default function UserInfo({
+  question,
+  isAIEnabled,
+  setIsAIEnabled,
+}: {
+  question: string;
+  isAIEnabled: boolean;
+  setIsAIEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
     return (
         <div className="flex items-center self-stretch ml-10 ">
             <img
@@ -22,7 +30,10 @@ export default function UserInfo( {question}: {question: string}) {
                 src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/4j9QAmMJn9/a2lww5bx_expires_30_days.png"} 
                 className="w-6 h-6 object-fill "
             /> */}
-            < ToggleSwitch  />
+            <ToggleAI
+        enabled={isAIEnabled}
+        setEnabled={setIsAIEnabled}
+      />
 
 
             
