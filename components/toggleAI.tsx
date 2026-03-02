@@ -1,14 +1,16 @@
- "use client";
- import { useState } from "react";
+"use client";
 
-export default function CleanToggle() {
-  const [enabled, setEnabled] = useState(false);
-
+export default function ToggleAI({
+  enabled,
+  setEnabled,
+}: {
+  enabled: boolean;
+  setEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
-    <div className="flex items-center gap-3">
-      
+    <div className="flex items-center gap-2">
       <span className="text-sm font-medium text-gray-700">
-         {enabled ? "AI Version" : "Original"}
+        {enabled ? "AI Version" : "Original"}
       </span>
 
       <div
@@ -23,7 +25,6 @@ export default function CleanToggle() {
           }`}
         />
       </div>
-
     </div>
   );
 }

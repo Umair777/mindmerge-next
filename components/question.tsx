@@ -5,7 +5,7 @@ import React from "react";
 
 import { useRouter } from "next/navigation";
 
-export default function Question( {Question, setQuestion}: {Question: string, setQuestion: (value: string) => void} ) {
+export default function Question( {Question, setQuestion}: {Question: string , setQuestion: (value: string) => void} ) {
    const router = useRouter();
   return (
     <div className="flex-1 p-0">
@@ -17,6 +17,8 @@ export default function Question( {Question, setQuestion}: {Question: string, se
 							
 							
 							<textarea
+							// value={Question}
+							
 							value={Question}
 							onChange={(e) => setQuestion(e.target.value)}
 							placeholder="Type your question"

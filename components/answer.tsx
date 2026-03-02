@@ -1,141 +1,123 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import TagList from "@/components/tagList";
 import VoteButton from "@/components/voteButton";
 import UserInfo from "@/components/userInfo";
-import CodeBlock from "@/components/codeBlock";
-export default function Answer( {question}: {question: string}) {
-    
-    return (
-        
-        // <div className="flex flex-col bg-white">
-        //     <div className="self-stretch bg-white ">
-                
-                <div className="flex items-start self-stretch mr-[321px] gap-[9px] ">
-                    
-                    <div className="flex flex-1 items-start gap-[45px] "> 
-                        <div className="flex flex-1 flex-col items-center gap-5 bg-black">
-                            <div className="flex flex-col items-start self-stretch bg-white py-[50px] pr-10 gap-5 rounded-[5px]" 
-                                style={{
-                                    boxShadow: "2px 1px 5px #00000026"
-                                }}>
-                                < UserInfo question={question} />
-                                <span className="text-black text-lg font-bold ml-10" >
-                                    {question}
-                                </span>
-                                <span className="text-black text-sm ml-10" >
-                                    {"Mi magna sed nec nisl mattis. Magna cursus tincidunt rhoncus imperdiet fermentum pretium, pharetra nisl. Euismod."}
-                                </span>
-                                < CodeBlock question={question} />
-                                <span className="text-black text-sm ml-10" >
-                                    {"Posuere arcu arcu consectetur turpis rhoncus tellus. Massa, consectetur massa sit fames nulla eu vehicula ullamcorper. Ante sit mauris elementum sollicitudin arcu sit suspendisse pretium. Nisl egestas fringilla justo bibendum."}
-                                </span>
-                                <div className="flex justify-between items-center self-stretch ml-10 mt-4">
-                                    < TagList question={question} />
-                                    < VoteButton question={question} />
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </div>
+
+export default function Answer({ question }: { question: string }) {
+  const [isAIEnabled, setIsAIEnabled] = useState(false);
+
+  const rawQuestionText = `i dont know why this is not working i am trying to update count but its not changing properly sometimes it logs wrong value also i am using react and useState but maybe i am doing something wrong`;
+
+  const rawCode = [
+    'import {useState} from "react"',
+    "",
+    "export default function Test(){",
+    "const [count,setCount]=useState(0)",
+    "",
+    "function handleClick(){",
+    "setCount(count+1)",
+    "console.log(count)",
+    "}",
+    "",
+    "return(",
+    "<div>",
+    "<p>{count}</p>",
+    '<button onClick={handleClick}>add</button>',
+    "</div>",
+    ")",
+    "}",
+  ];
+
+  return (
+    <div className="flex items-start self-stretch mr-[321px] gap-[9px]">
+      <div className="flex flex-1 items-start gap-[45px]">
+        <div className="flex flex-1 flex-col items-center gap-5 bg-black">
+          <div
+            className="flex flex-col items-start self-stretch bg-white py-[50px] pr-10 gap-5 rounded-[5px]"
+            style={{ boxShadow: "2px 1px 5px #00000026" }}
+          >
+            <UserInfo
+            //   question={question}\
+            question={question}
+              isAIEnabled={isAIEnabled}
+              setIsAIEnabled={setIsAIEnabled}
+            />
+
+            {/* 🔵 RAW QUESTION VIEW */}
+            {!isAIEnabled && (
+              <>
+                <span className="text-black text-lg font-bold ml-10">
+                  {/* {question} */}
+                  {rawQuestionText}
+                </span>
+
+                <span className="text-black text-sm ml-10 whitespace-pre-line">
+                  {/* {rawQuestionText} */}
+                </span>
+
+                <div className="bg-gray-100 p-4 rounded-md ml-10 w-full font-mono text-sm text-black">
+                  {rawCode.map((line, index) => (
+                    <div key={index}>{line}</div>
+                  ))}
                 </div>
-        //     </div>
-        // </div>
-    
-);
+              </>
+            )}
+
+            {/* 🟢 AI FORMATTED VIEW */}
+            {isAIEnabled && (
+              <>
+                <h2 className="text-xl font-bold ml-10 text-black">
+                  Why does React useState log the previous state value after updating?
+                </h2>
+
+                <h3 className="text-md font-semibold ml-10 mt-4 text-black">
+                  Problem Description
+                </h3>
+
+                <p className="text-sm ml-10 text-black">
+                  I am using React's useState hook to update a counter.
+                  However, when I log the value immediately after calling
+                  setCount, it prints the previous value instead of the updated one.
+                </p>
+                <h3 className="text-md font-semibold text-black ml-10 mt-4 ">
+                  Code Example
+                </h3>
+
+                <div className="bg-gray-900 p-4 rounded-md ml-10 mr-10 w-full font-mono text-sm">
+                  {rawCode.map((line, index) => (
+                    <div key={index}>{line}</div>
+                  ))}
+                </div>
+
+                <h3 className="text-md font-semibold ml-10 mt-4 text-black">
+                  Observed Behavior
+                </h3>
+
+                <p className="text-sm ml-10 whitespace-pre-line text-black">
+                  When clicking the button:
+                  - UI updates correctly
+                  - console.log(count) prints the previous value
+                </p>
+
+                <h3 className="text-md font-semibold ml-10 mt-4 text-black">
+                  Main Question
+                </h3>
+
+                <p className="text-sm ml-10 text-black">
+                  Why does useState not immediately reflect the updated value?
+                  Is state updating asynchronous in React?
+                </p>
+              </>
+            )}
+
+            <div className="flex justify-between items-center self-stretch ml-10 mt-4">
+              <TagList question={question} />
+              <VoteButton question={question} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
-
-
-// import React from "react";
-// export default function Answer( {question}) {
-//     return (
-        
-//         <div className="flex flex-col bg-[#FCF4EC]">
-//             <div className="self-stretch bg-white ">
-                
-//                 <div className="flex items-start self-stretch mr-[282px] gap-[9px] ">
-                    
-//                     <div className="flex flex-1 items-start gap-[45px]  "> 
-//                         <div className="flex flex-1 flex-col items-center gap-5  ">
-//                             <div className="flex flex-col items-start self-stretch bg-white py-[50px] pr-10 gap-5 rounded-[5px] " 
-//                                 style={{
-//                                     boxShadow: "2px 1px 5px #00000026"
-//                                 }}>
-//                                 <div className="flex items-center self-stretch ml-10">
-//                                     <img
-//                                         src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/4j9QAmMJn9/4rhb9pqa_expires_30_days.png"} 
-//                                         className="w-10 h-10 mr-[15px] object-fill"
-//                                     />
-//                                     <div className="flex flex-col shrink-0 items-start gap-[5px]">
-//                                         <span className="text-black text-[13px] mr-10" >
-//                                             {"@Golanginya"}
-//                                         </span>
-//                                         <span className="text-[#808080] text-[10px]" >
-//                                             {"12 November 2020 19:35"}
-//                                         </span>
-//                                     </div>
-//                                     <div className="flex-1 self-stretch">
-//                                     </div>
-//                                     <img
-//                                         src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/4j9QAmMJn9/a2lww5bx_expires_30_days.png"} 
-//                                         className="w-6 h-6 object-fill"
-//                                     />
-//                                 </div>
-//                                 <span className="text-black text-lg font-bold ml-10" >
-//                                     {question}
-//                                 </span>
-//                                 <span className="text-black text-sm ml-10" >
-//                                     {"Mi magna sed nec nisl mattis. Magna cursus tincidunt rhoncus imperdiet fermentum pretium, pharetra nisl. Euismod."}
-//                                 </span>
-//                                 <div className="flex items-center self-stretch bg-[#EAEAEA] py-2.5 ml-10">
-//                                     <span className="text-[#857857] text-sm text-center w-[7px] mx-4" >
-//                                         {"1\n2\n3\n4\n5\n6\n7"}
-//                                     </span>
-//                                     <span className="text-black text-sm w-[196px]" >
-//                                         {"package mian\n\nimport “fmt”\n\nfunc main() {\n      fmt.Println(“Hello, world!”)\n}"}
-//                                     </span>
-//                                 </div>
-//                                 <span className="text-black text-sm ml-10" >
-//                                     {"Posuere arcu arcu consectetur turpis rhoncus tellus. Massa, consectetur massa sit fames nulla eu vehicula ullamcorper. Ante sit mauris elementum sollicitudin arcu sit suspendisse pretium. Nisl egestas fringilla justo bibendum."}
-//                                 </span>
-//                                 <div className="flex justify-between items-center self-stretch bg-white ml-10">
-//                                     <div className="flex shrink-0 items-center gap-2.5">
-//                                         <button className="flex flex-col shrink-0 items-start bg-[#EAEAEA] text-left py-[5px] px-2.5 rounded-[5px] border-0"
-//                                             onClick={()=>alert("Pressed!")}>
-//                                             <span className="text-[#808080] text-[10px]" >
-//                                                 {"java"}
-//                                             </span>
-//                                         </button>
-//                                         <button className="flex flex-col shrink-0 items-start bg-[#EAEAEA] text-left py-[5px] px-2.5 rounded-[5px] border-0"
-//                                             onClick={()=>alert("Pressed!")}>
-//                                             <span className="text-[#808080] text-[10px]" >
-//                                                 {"javascript"}
-//                                             </span>
-//                                         </button>
-//                                         <button className="flex flex-col shrink-0 items-start bg-[#EAEAEA] text-left py-[5px] px-2.5 rounded-[5px] border-0"
-//                                             onClick={()=>alert("Pressed!")}>
-//                                             <span className="text-[#808080] text-[10px]" >
-//                                                 {"wtf"}
-//                                             </span>
-//                                         </button>
-//                                     </div>
-//                                                                         <button className="flex shrink-0 items-center bg-[#1682FD] text-left py-2 px-5 gap-3 rounded-[5px] border-0"
-//                                                                             onClick={()=>alert("Pressed!")}>
-//                                                                             <img
-//                                                                                 src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/4j9QAmMJn9/zu5mx4iv_expires_30_days.png"} 
-//                                                                                 className="w-[13px] h-[13px] rounded-[5px] object-fill"
-//                                                                             />
-//                                                                             <span className="text-white text-xs font-bold" >
-//                                                                                 {"Vote"}
-//                                                                             </span>
-//                                                                         </button>
-//                                                                     </div>
-//                                                                 </div>
-//                                                             </div>
-//                                                         </div>
-//                                                     </div>
-//                                                 </div>
-//                                             </div>
-//                                         );
-//                                     }
-
