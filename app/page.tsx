@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
-import Header from "@/components/header";
 import PostQuestion from "@/components/postQuestion";
 
 export default function HomePage() {

@@ -39,14 +39,14 @@ export default function AuthPage() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-96 bg-white p-8 rounded-lg shadow">
 
-        <h2 className="text-2xl font-bold text-center mb-6">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
           {isLogin ? "Login" : "Create Account"}
         </h2>
 
         <form onSubmit={handleAuth} className="flex flex-col gap-4">
 
           <input
-            className="border p-2 rounded"
+            className="border p-2 rounded text-black"
             type="email"
             placeholder="Email"
             required
@@ -55,7 +55,7 @@ export default function AuthPage() {
           />
 
           <input
-            className="border p-2 rounded"
+            className="border p-2 rounded text-black"
             type="password"
             placeholder="Password"
             required
@@ -69,7 +69,7 @@ export default function AuthPage() {
 
         </form>
 
-        <p className="text-center mt-4 text-sm">
+        <p className="text-center mt-4 text-sm text-gray-600">
           {isLogin ? "No account?" : "Already have an account?"}
         </p>
 
