@@ -1,41 +1,81 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# =========================
+# ROOT LEVEL IGNORE
+# =========================
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# =========================
+# mindmerge-frontend (Next.js)
+# =========================
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+mindmerge-frontend/node_modules/
 
-# testing
-/coverage
+# build outputs
+mindmerge-frontend/.next/
+mindmerge-frontend/out/
+mindmerge-frontend/build/
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
+# cache
+mindmerge-frontend/.turbo/
 
 # misc
-.DS_Store
+mindmerge-frontend/coverage/
+
+# next.js
+mindmerge-frontend/next-env.d.ts
+
+# =========================
+# BACKEND (Python / FastAPI)
+# =========================
+
+# virtual environments
+mindmerge-backend/venv/
+mindmerge-backend/.venv/
+
+# python cache
+mindmerge-backend/__pycache__/
+mindmerge-backend/*.pyc
+
+# db
+mindmerge-backend/*.db
+
+# =========================
+# GLOBAL FALLBACK (IMPORTANT)
+# =========================
+
+# ignore ANY node_modules anywhere
+node_modules/
+
+# ignore ANY venv anywhere
+venv/
+.venv/
+
+# python cache global
+__pycache__/
+*.pyc
+
+# next global
+.next/
+
+# =========================
+# SECURITY
+# =========================
+
+# secrets
 *.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+*.key
