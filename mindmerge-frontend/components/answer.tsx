@@ -4,11 +4,12 @@ import TagList from "@/components/tagList";
 import VoteButton from "@/components/voteButton";
 import UserInfo from "@/components/userInfo";
 
-export default function Answer({ question }: { question: string }) {
+export default function Answer({ question }: { question: any }) {
+  console.log("Answer loadedd");
+  console.log("Question prop:", question);
   const [isAIEnabled, setIsAIEnabled] = useState(false);
 
-  const rawQuestionText = `i dont know why this is not working i am trying to update count but its not changing properly sometimes it logs wrong value also i am using react and useState but maybe i am doing something wrong`;
-
+  const rawQuestionText = question?.original_text || "";
   const rawCode = [
     'import {useState} from "react"',
     "",

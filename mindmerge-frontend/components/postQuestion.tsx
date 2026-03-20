@@ -28,7 +28,7 @@ return(
 `;
   const [QuestionText, setQuestionText] = useState(messyTemplate);
   return (
-    <Layout title="New Question">
+    <Layout title="New Qusestion">
       <Question
         Question={QuestionText}
         setQuestion={setQuestionText}
