@@ -1,13 +1,38 @@
 "use client";
 import React from "react";
-// import { useNavigate } from "react-router-dom";
-
-
+import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
+
 
 export default function Question( {Question, setQuestion}: {Question: string , setQuestion: (value: string) => void} ) {
    const router = useRouter();
-  return (
+
+const handlePublish = async () => {
+  const { data: userData } = await supabase.auth.getUser();
+  
+  const user = userData.user;
+
+  if (!user) return;
+
+  const { data, error } = await supabase
+    .from("questions")
+    .insert([
+      {
+        user_id: user.id,
+        original_text: Question,
+      },
+    ])
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+  console.log("User:", user);
+  router.push(`/answer/${data.id}`);
+};  
+return (
     <div className="flex-1 p-0">
       
         <div className="flex flex-1 flex-col bg-white py-[30px] px-10 gap-5" 
@@ -45,7 +70,7 @@ export default function Question( {Question, setQuestion}: {Question: string , s
 									</button>
 
                     <button className="flex shrink-0 items-center bg-[#00a6ff] text-left py-2 px-5 gap-3 rounded-[5px] border-0"
-                        onClick={() => router.push(`/answer/${encodeURIComponent(Question)}`)}>
+                        onClick={() => handlePublish()}>
                         <img
                             src={"https://storage.googleapis.com/tagjs-prod.appspot.com/v1/4j9QAmMJn9/sd7bdvbx_expires_30_days.png"} 
                             className="w-[13px] h-[13px] rounded-[5px] object-fill"
