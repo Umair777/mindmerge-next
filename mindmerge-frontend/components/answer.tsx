@@ -1,10 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TagList from "@/components/tagList";
 import VoteButton from "@/components/voteButton";
 import UserInfo from "@/components/userInfo";
 import ReactMarkdown from "react-markdown";
-
 
 export default function Answer({ question }: { question: any }) {
   const [isAIEnabled, setIsAIEnabled] = useState(false);
@@ -12,7 +11,9 @@ export default function Answer({ question }: { question: any }) {
   const [loading, setLoading] = useState(false);
 
   const rawQuestionText = question?.original_text || "";
-  console.log("Question in Answer component:", question);
+
+  console.log("AI STATE:", isAIEnabled);
+
   // 🔥 Fetch AI response
   const fetchAI = async () => {
     try {
@@ -37,14 +38,19 @@ export default function Answer({ question }: { question: any }) {
     }
   };
 
-  // 🔥 Toggle handler
-  const handleToggle = async () => {
-    setIsAIEnabled((prev) => !prev);
-
-    if (!isAIEnabled && !aiData) {
-      await fetchAI();
+  // ✅ Trigger AI fetch when toggle ON
+  useEffect(() => {
+    if (isAIEnabled && !aiData) {
+      fetchAI();
     }
-  };
+  }, [isAIEnabled, aiData]);
+
+  // ✅ Reset AI when toggle OFF
+  useEffect(() => {
+    if (!isAIEnabled) {
+      setAiData(null);
+    }
+  }, [isAIEnabled]);
 
   // 🔥 BLOCK RENDERER
   const renderBlocks = () => {
@@ -77,7 +83,8 @@ export default function Answer({ question }: { question: any }) {
               <h3 className="text-md font-semibold text-black">
                 {block.label}
               </h3>
-              <pre className="bg-gray-900 text-white p-4 rounded-md overflow-x-auto text-sm">
+              {/* <pre className="bg-gray-900 text-white p-4 rounded-md overflow-x-auto text-sm"> */}
+               <pre className="bg-gray-900 text-white p-4 rounded-md overflow-x-auto max-w-full text-sm">
                 {block.content}
               </pre>
             </div>
@@ -90,52 +97,53 @@ export default function Answer({ question }: { question: any }) {
   };
 
   return (
-    <div className="flex items-start self-stretch mr-[321px] gap-[9px]">
-      <div className="flex flex-1 items-start gap-[45px]">
-        <div className="flex flex-1 flex-col items-center gap-5 bg-black">
-          <div
+    // <div className="flex items-start self-stretch mr-[321px] gap-[9px]">
+      <div className="flex w-full justify-center">
+      {/* <div className="flex flex-1 items-start gap-[45px]"> */}
+      <div className="flex w-full justify-center">
+        {/* <div className="flex flex-1 flex-col items-center gap-5 bg-black">*/}
+        <div className="flex w-full flex-col items-center gap-5 bg-black"> 
+          {/* <div
             className="flex flex-col items-start self-stretch bg-white py-[50px] pr-10 gap-5 rounded-[5px]"
             style={{ boxShadow: "2px 1px 5px #00000026" }}
-          >
-            {/* 🔥 PASS CUSTOM TOGGLE */}
+          > */}
+          <div
+  className="flex flex-col items-start w-full max-w-[800px] bg-white py-6 px-6 gap-5 rounded-[5px]"
+  style={{ boxShadow: "2px 1px 5px #00000026" }}
+>
+            {/*  CORRECT: pass setter */}
             <UserInfo
               question={question}
               isAIEnabled={isAIEnabled}
-              setIsAIEnabled={handleToggle}
+              setIsAIEnabled={setIsAIEnabled}
             />
 
             {/* 🔵 RAW VIEW */}
-            <>
-            {console.log("Rendering raw question view")}
-            </>
             {!isAIEnabled && (
-              
-              <>
-              {console.log("AI Not Enabled")}
-                <div className="ml-10 mr-10">
-                  <h2 className="text-lg font-bold text-black">
-                    Raw Question
-                  </h2>
+              <div className="ml-10 mr-10">
+                <h2 className="text-lg font-bold text-black">
+                  Raw Question
+                </h2>
 
-                  <pre className="bg-gray-100 p-4 rounded-md text-sm text-black whitespace-pre-wrap mt-2">
-                    {rawQuestionText}
-                  </pre>
-                </div>
-              </>
+                <pre className="bg-gray-100 p-4 rounded-md text-sm text-black whitespace-pre-wrap mt-2">
+                  {rawQuestionText}
+                </pre>
+              </div>
             )}
 
             {/* 🟢 AI VIEW */}
             {isAIEnabled && (
               <>
-                {console.log("AI Enabled")}
                 {loading && (
-                  <p className="ml-10 text-blue-500">Generating AI response...</p>
+                  <p className="ml-10 text-blue-500">
+                    Generating AI response...
+                  </p>
                 )}
 
-                {/* 🔥 PRIMARY: BLOCK RENDERING */}
+                {/* Blocks */}
                 {!loading && aiData?.blocks && renderBlocks()}
 
-                {/* 🔥 FALLBACK: MARKDOWN */}
+                {/* Markdown fallback */}
                 {!loading && !aiData?.blocks && aiData?.markdown && (
                   <div className="ml-10 mr-10 prose max-w-none">
                     <ReactMarkdown>{aiData.markdown}</ReactMarkdown>

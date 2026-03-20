@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 export default function ToggleAI({
   enabled,
   setEnabled,
@@ -14,7 +16,7 @@ export default function ToggleAI({
       </span>
 
       <div
-        onClick={() => setEnabled(!enabled)}
+        onClick={() => setEnabled((prev) => !prev)} // ✅ FIX HERE
         className={`relative inline-flex h-6 w-11 items-center rounded-full cursor-pointer transition-colors duration-300 ${
           enabled ? "bg-blue-500" : "bg-gray-300"
         }`}
