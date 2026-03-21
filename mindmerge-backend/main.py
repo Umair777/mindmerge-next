@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-
+  
 app = FastAPI()
 
 app.add_middleware(
@@ -14,7 +14,6 @@ app.add_middleware(
 
 class QuestionRequest(BaseModel):
     text: str
-
 
 @app.post("/improve")
 async def improve_question(req: QuestionRequest):

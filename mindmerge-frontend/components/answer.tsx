@@ -78,17 +78,19 @@ export default function Answer({ question }: { question: any }) {
           );
 
         case "code":
-          return (
-            <div key={i} className="ml-10 mt-4 mr-10">
-              <h3 className="text-md font-semibold text-black">
-                {block.label}
-              </h3>
-              {/* <pre className="bg-gray-900 text-white p-4 rounded-md overflow-x-auto text-sm"> */}
-               <pre className="bg-gray-900 text-white p-4 rounded-md overflow-x-auto max-w-full text-sm">
-                {block.content}
-              </pre>
-            </div>
-          );
+        return (
+          <div key={i} className="ml-10 mt-4 mr-10">
+            <h3 className="text-md font-semibold text-black">
+              {block.label}
+            </h3>
+
+            <pre className="bg-gray-900 text-white p-4 rounded-md overflow-x-auto max-w-full text-sm whitespace-pre-wrap break-words">
+              {Array.isArray(block.content)
+                ? block.content.join("\n")
+                : block.content}
+            </pre>
+          </div>
+        );
 
         default:
           return null;
@@ -97,21 +99,10 @@ export default function Answer({ question }: { question: any }) {
   };
 
   return (
-    // <div className="flex items-start self-stretch mr-[321px] gap-[9px]">
-      <div className="flex w-full justify-center">
-      {/* <div className="flex flex-1 items-start gap-[45px]"> */}
-      <div className="flex w-full justify-center">
-        {/* <div className="flex flex-1 flex-col items-center gap-5 bg-black">*/}
-        <div className="flex w-full flex-col items-center gap-5 bg-black"> 
-          {/* <div
-            className="flex flex-col items-start self-stretch bg-white py-[50px] pr-10 gap-5 rounded-[5px]"
-            style={{ boxShadow: "2px 1px 5px #00000026" }}
-          > */}
           <div
-  className="flex flex-col items-start w-full max-w-[800px] bg-white py-6 px-6 gap-5 rounded-[5px]"
-  style={{ boxShadow: "2px 1px 5px #00000026" }}
->
-            {/*  CORRECT: pass setter */}
+            className="flex flex-col items-start w-full max-w-[800px] bg-white py-6 px-6 gap-5 rounded-[5px]"
+            style={{ boxShadow: "2px 1px 5px #00000026" }} >
+          
             <UserInfo
               question={question}
               isAIEnabled={isAIEnabled}
@@ -158,8 +149,7 @@ export default function Answer({ question }: { question: any }) {
               <VoteButton question={question} />
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        
+    
   );
 }

@@ -26,7 +26,7 @@ export default function UserInfo({
         </span>
       </div>
 
-      <div className="ml-4 flex-shrink-0"/>
+      <div className="flex-1 self-stretch"/>
   <ToggleAI
     enabled={isAIEnabled}
     setEnabled={setIsAIEnabled}

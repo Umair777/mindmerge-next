@@ -2,6 +2,7 @@
 import Layout from "@/components/layout";
 import Answer from "@/components/answer";
 import { supabase } from "@/lib/supabaseClient";
+import Suggestions from "@/components/suggestions";
 
 export default async function AnswerView({ params }: any) {
   console.log("AnswerView loaded");
@@ -18,7 +19,8 @@ export default async function AnswerView({ params }: any) {
   return (
     <Layout title="Answer View">
       <Answer question={data} />
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+    <Suggestions />
     </Layout>
   );
 }
